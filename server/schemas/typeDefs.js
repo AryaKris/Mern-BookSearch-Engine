@@ -25,7 +25,7 @@ type Auth {
     user: User
 
 }
-type Quer{
+type Query{
     me: User
 }
 
