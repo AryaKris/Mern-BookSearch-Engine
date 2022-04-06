@@ -11,12 +11,21 @@ const resolvers = {
 
                     return userData;
             }
-            throw new AuthentiactionError("user not logged in")
+            throw new AuthenticationError("user not logged in")
         }
         
     },
 
     Mutation: {
+        async createUser(parent,args,context) {
+            const user = await User.create(args);
+
+            if (!user) {
+                throw new AuthentiactionError("user not logged in") 
+            }
+            const token = signToken(user);
+           return { token, user };
+        },  
 
     }
 
