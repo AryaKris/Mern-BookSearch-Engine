@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-// app.use(routes);
+
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
@@ -37,8 +37,6 @@ const startApolloServer = async (typeDefs, resolvers) => {
 };
 
 
-// db.once('open', () => {
-//   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
-// });
+
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);
