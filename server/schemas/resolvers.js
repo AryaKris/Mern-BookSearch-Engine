@@ -17,7 +17,7 @@ const resolvers = {
     },
 
     Mutation: {
-        createUser: async (parent, args, context) => {
+        addUser: async (parent, args, context) => {
             const user = await User.create(args);
 
             if (!user) {
@@ -57,8 +57,21 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
 
+        },
+         removeBook: async (parent, { bookId }, context) => {
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { savedBooks: { bookId } } },
+                { new: true }
+            );
+            if (!updatedUser) {
+                throw new AuthenticationError('Cannot find the user');
+            }
+            return updatedUser;
         }
     }
+
+   
 
 };
 
